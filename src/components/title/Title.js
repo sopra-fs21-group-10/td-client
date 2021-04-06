@@ -129,50 +129,17 @@ class Login extends React.Component {
     return (
       <BaseContainer>
         <FormContainer>
-          <Form>
-            <Label>Username</Label>
-            <InputField
-              placeholder="Enter here..."
-              onChange={e => {
-                this.handleInputChange('username', e.target.value);
+          <Button
+              width="50%"
+              onClick={() => {
+                //this.login();
+                this.props.history.push(`/login`);
               }}
-            />
-            <Label>Name</Label>
-            <InputField
-              placeholder="Enter here.."
-              onChange={e => {
-                this.handleInputChange('name', e.target.value);
-              }}
-            />
-            <Label>Dummy</Label>
-            <InputField
-                placeholder="Some dummy text"
-                onChange={e => {
-                  this.handleInputChange('name', e.target.value);
-                }}
-            />
-            <ButtonContainer>
-              <Button
-                disabled={!this.state.username || !this.state.name}
-                width="50%"
-                onClick={() => {
-                  //this.login();
-                  this.props.history.push(`/main`);
-                }}
-              >
-                Login
-              </Button>
-              <Button
-                  width="50%"
-                  onClick={() => {
-                    //this.login();
-                    this.props.history.push(`/registration`);
-                  }}
-              >
-                Registration
-              </Button>
-            </ButtonContainer>
-          </Form>
+          >
+            Login
+          </Button>
+
+
         </FormContainer>
       </BaseContainer>
     );
