@@ -6,7 +6,29 @@ import User from '../shared/models/User';
 import { withRouter } from 'react-router-dom';
 import { Button } from '../../views/design/Button';
 
+import "./Lobby.css"
+
+
 const FormContainer = styled.div`
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 300px;
+  justify-content: center;
+`;
+const Player1 = styled.div`
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 300px;
+  justify-content: center;
+  color: white;
+  border: 1px solid black;
+  width: 530px;
+`;
+const Player2 = styled.div`
   margin-top: 2em;
   display: flex;
   flex-direction: column;
@@ -60,6 +82,17 @@ const Title = styled.h1`
   color: white;
   text-align: center;
 `;
+const ButtonNext = styled.div`
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+
+  width: 530px;
+`;
+
+
 /**
  * Classes in React allow you to have an internal state within the class and to have the React life-cycle for your component.
  * You should have a class (instead of a functional component) when:
@@ -112,29 +145,37 @@ class Login extends React.Component {
 
   render() {
     return (
-      <BaseContainer>
-      <Title>Singleplayer</Title>
-        <FormContainer>
-          <Button
-              width="50%"
-              onClick={() => {
+        <BaseContainer>
+        <Title>Lobby</Title>
+        <div id="parent">
+          <div id="wide">Host</div>
+          <div id="narrow">Player2</div>
+        </div>
+        <Player1>
+        <h1>Invite here</h1>
+        </Player1>
+        <ButtonNext>
+                      <Button
+                        width="50%"
+                        onClick={() => {
+                        }}
+                      >
+                        Invite Player
+                      </Button>
 
-                this.props.history.push(`/main`);
-              }}
-          >
-            Back to Main Menu
-          </Button>
+                    </ButtonNext>
+          <FormContainer>
           <Button
-              width="50%"
-              onClick={() => {
+                                  width="50%"
+                                  onClick={() => {
+                                    this.props.history.push(`/multiplayer`);
+                                  }}
+                              >
+                                Leave Lobby
+                              </Button>
+          </FormContainer>
 
-                this.props.history.push(`/game`);
-              }}
-          >
-            Start Game
-          </Button>
-        </FormContainer>
-      </BaseContainer>
+        </BaseContainer>
     );
   }
 }
