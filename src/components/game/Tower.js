@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-class Minion extends Component {
+class Tower extends Component {
 
     state = {
         // size of minion canvas
@@ -14,11 +14,11 @@ class Minion extends Component {
         const ctx = canvas.getContext('2d');
 
         // load the picture
-        var minion = new Image();
-        minion.onload = function() {
-            ctx.drawImage(minion, 1, 1);
+        var tower = new Image();
+        tower.onload = function() {
+            ctx.drawImage(tower, -10, -10);
         };
-        minion.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png';
+        tower.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/145.png';
 
         //ctx.fillRect(0, 0, this.state.canvasWidth, this.state.canvasHeight);
     }
@@ -26,10 +26,10 @@ class Minion extends Component {
     render() {
         return (
             <div>
-                <canvas ref={this.canvasRef} width={this.state.canvasWidth} height={this.state.canvasHeight} id={"layer2"}/>
+                <canvas ref={this.canvasRef} width={this.state.canvasWidth} height={this.state.canvasHeight} id={"layer3"}/>
             </div>
         );
     }
 }
 
-export default Minion
+export default Tower
