@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components";
 
 
-const StyledTile = styled.canvas`
+const StyledTowerTile = styled.canvas`
     width: ${props => props.width};
     height: ${props => props.height}; 
     background: ${props => props.background};
@@ -11,15 +11,15 @@ const StyledTile = styled.canvas`
     position: absolute;
     left: ${props => props.left};
     top: ${props => props.top};
+    z-index: 3;
 `;
 
-const Tile = (tile) => {
+const TowerTile = (tile) => {
 	return (
 		<div>
-            <StyledTile background={tile.background} color={tile.color} width={tile.width} height={tile.height} left={tile.left} top={tile.top}></StyledTile>
-            <div></div>
+            <StyledTowerTile background={tile.background} color={tile.color} width={tile.width} height={tile.height} left={tile.left} top={tile.top}></StyledTowerTile>
         </div>
 	)
 }
 
-export default Tile
+export default TowerTile

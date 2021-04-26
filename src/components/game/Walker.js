@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components";
 
 
-const StyledTile = styled.canvas`
+const StyledWalker = styled.canvas`
     width: ${props => props.width};
     height: ${props => props.height}; 
     background: ${props => props.background};
@@ -13,13 +13,12 @@ const StyledTile = styled.canvas`
     top: ${props => props.top};
 `;
 
-const Tile = (tile) => {
+const Walker = (walker) => {
 	return (
 		<div>
-            <StyledTile background={tile.background} color={tile.color} width={tile.width} height={tile.height} left={tile.left} top={tile.top}></StyledTile>
-            <div></div>
+            <StyledWalker background={walker.background} color={walker.color} width={walker.width} height={walker.height} left={walker.left} top={walker.top}> </StyledWalker>
         </div>
 	)
 }
 
-export default Tile
+export default Walker

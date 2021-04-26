@@ -1,6 +1,19 @@
 import React, {Component} from "react";
+import styled from "styled-components";
 
-class Minion extends Component {
+const StyledCrawler = styled.canvas`
+    width: ${props => props.width};
+    height: ${props => props.height}; 
+    background: ${props => props.background};
+    background-position: center center;
+    background-color: ${props => props.color}; 
+    position: absolute;
+    left: ${props => props.left};
+    top: ${props => props.top};
+    z-index: 3;
+`;
+
+class Crawler extends Component {
 
     state = {
         // size of minion canvas
@@ -15,7 +28,7 @@ class Minion extends Component {
 
         // load the picture
         var minion = new Image();
-        minion.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png';
+        minion.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png';
         
         // scale picture down an put into canvas
         minion.onload = function () {
@@ -38,14 +51,13 @@ class Minion extends Component {
         //ctx.fillRect(0, 0, this.state.canvasWidth, this.state.canvasHeight);
     }
 
-
     render() {
         return (
             <div>
-                <canvas ref={this.canvasRef} width={this.state.canvasWidth} height={this.state.canvasHeight} id={"layer2"}/>
+                <canvas ref={this.canvasRef} width={this.state.canvasWidth} height={this.state.canvasHeight} id={"layer4"}/>
             </div>
         );
     }
 }
 
-export default Minion
+export default Crawler
