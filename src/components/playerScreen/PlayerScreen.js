@@ -5,7 +5,7 @@ import { api, handleError } from '../../helpers/api';
 import User from '../shared/models/User';
 import { withRouter } from 'react-router-dom';
 import Player from '../../views/Player';
-import Lobby from "../shared/models/Lobby"
+
 import { Spinner } from '../../views/design/Spinner';
 import { Button } from '../../views/design/Button';
 import { component } from "react";
@@ -179,13 +179,11 @@ class Login extends React.Component {
             alert(`Something went wrong during selecting user: \n${handleError(error)}`);
           }
         }
-  async leaveLobby(lobbyId) {
+  async leaveLobby() {
           try {
             const requestBody = JSON.stringify({
                     lobbyId: localStorage.getItem("lobbyId")
                   });
-            //const response = await api.put("lobbies/"+lobbyId, requestBody);
-            //const lobby = new Lobby(response.data);
 
             this.props.history.push("/multiplayer"); //redirect to profile
           } catch (error) {

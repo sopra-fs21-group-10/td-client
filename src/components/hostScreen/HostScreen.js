@@ -5,11 +5,11 @@ import { api, handleError } from '../../helpers/api';
 import User from '../shared/models/User';
 import { withRouter } from 'react-router-dom';
 import Player from '../../views/Player';
-import Lobby from "../shared/models/Lobby"
+import "./HostScreen.css"
 import { Spinner } from '../../views/design/Spinner';
 import { Button } from '../../views/design/Button';
 import { component } from "react";
-import "./Lobby.css"
+import Lobby from "../shared/models/Lobby"
 import lobby from "../../lobby.jpg";
 var sectionStyle = {
   width: "100%",
@@ -139,7 +139,8 @@ class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-        bgColor: ""
+        owner: null,
+        player2: null
     };
 
 
@@ -160,40 +161,31 @@ class Login extends React.Component {
     // this.setState({'username': value});
     this.setState({ [key]: value });
   }
-
-  highlight = (e) => {
-    this.setState({
-        bgColor: "red"
-
-    })
-  }
-  reload(){
-    window.location.reload(false);
-  }
-
-  async selectUser(userid) {
-          try {
-
-            this.highlight(userid);
-          } catch (error) {
-            alert(`Something went wrong during selecting user: \n${handleError(error)}`);
-          }
-        }
-  async leaveLobby(lobbyId) {
+  //doesn't work
+  async leaveLobby() {
           try {
             const requestBody = JSON.stringify({
                     lobbyId: localStorage.getItem("lobbyId")
                   });
-            //const response = await api.put("lobbies/"+lobbyId, requestBody);
-            //const lobby = new Lobby(response.data);
 
             this.props.history.push("/multiplayer"); //redirect to profile
           } catch (error) {
             alert(`Something went wrong during leaving the lobby: \n${handleError(error)}`);
           }
         }
-
-
+  reload(){
+      window.location.reload(false);
+  }
+  async displayPlayers(lobbyId){
+        try{
+            const response = await api.get("lobbies"+lobbyId);
+            const lobby = new Lobby(response.data);
+            //this.setState({owner: owner.username, player2: player2.username})
+        }
+        catch(error){
+         alert(`Something went wrong during displaying the players: \n${handleError(error)}`);
+        }
+  }
   /**
    * componentDidMount() is invoked immediately after a component is mounted (inserted into the tree).
    * Initialization that requires DOM nodes should go here.
@@ -201,28 +193,10 @@ class Login extends React.Component {
    * You may call setState() immediately in componentDidMount().
    * It will trigger an extra rendering, but it will happen before the browser updates the screen.
    */
-   async componentDidMount() {
-         try {
-           const response = await api.get('/users');
-           // delays continuous execution of an async operation for 1 second.
-           // This is just a fake async call, so that the spinner can be displayed
-           // feel free to remove it :)
-           await new Promise(resolve => setTimeout(resolve, 1000));
 
-           // Get the returned users and update the state.
-           this.setState({ users: response.data });
-
-           //tracking error
-           console.log('request to:', response.request.responseURL);
-           console.log('status code:', response.status);
-           console.log('status text:', response.statusText);
-           console.log('requested data:', response.data);
-           console.log(response);
-
-         } catch (error) {
-           alert(`Something went wrong while fetching the users: \n${handleError(error)}`);
-         }
-       }
+   componentDidMount() {
+        //this.displayPlayers(lobbyId);
+   }
 
 
   render() {
@@ -234,73 +208,6 @@ class Login extends React.Component {
           <div id="wide">Host</div>
           <div id="narrow">Player2</div>
         </div>
-        <div id="parent">
-          <Player1>
-              <Container>
-                      <h2>Userlist</h2>
-
-                      {!this.state.users ? (
-                        <Spinner />
-                      ) : (
-                        <div>
-                          <Users>
-                            {this.state.users.map(user => {
-                              return (
-                                <PlayerContainer key={user.id}
-                                style={{backgroundColor: this.state.bgColor}}
-                                onClick={() => {
-                                                this.selectUser();//highlight it;
-
-                                              }}
-                                >
-                                  <Player user={user} />
-
-                                </PlayerContainer>
-                              );
-                            })}
-                          </Users>
-                        </div>
-                      )}
-                    </Container>
-          </Player1>
-          <Player2>
-              <p>Readystatus</p>
-              <p>Kick Player</p>
-          </Player2>
-                </div>
-
-        <ButtonNext>
-        <div id="parent">
-                  <div id="wide2"><Button
-                                                         width="50%"
-                                                         onClick={() => {
-                                                         //here comes directory
-                                                         }}
-                                                       >
-                                                         Invite Player
-                                                       </Button></div>
-                  <div id="narrow2"><Button
-                                                           width="50%"
-                                                           onClick={() => {
-                                                           this.reload()
-                                                           }}
-                                                         >
-                                                           Reload
-                                                         </Button></div>
-                </div>
-                    </ButtonNext>
-          <FormContainer>
-          <Button
-                                  width="50%"
-                                  onClick={() => {
-                                    this.leaveLobby();
-                                  }}
-                              >
-                                Leave Lobby
-                              </Button>
-
-
-          </FormContainer>
 
         </BaseContainer>
         </div>
