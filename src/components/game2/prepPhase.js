@@ -923,43 +923,6 @@ class Game extends React.Component {
       }
 
       // minion spawner
-
-      if (frame % minionsInterval === 0) {
-        if (frame % 1500 === 0) {
-          minions.push(
-            new Minion(
-              MINIONS.BOSS.minionColor,
-              MINIONS.BOSS.minionSize,
-              MINIONS.BOSS.minionHealth,
-              MINIONS.BOSS.minionSpeed,
-              MINIONS.BOSS.minionDamage
-            )
-          );
-        } else if (frame % 500 === 0) {
-          minions.push(
-            new Minion(
-              MINIONS.RUNNER.minionColor,
-              MINIONS.RUNNER.minionSize,
-              MINIONS.RUNNER.minionHealth,
-              MINIONS.RUNNER.minionSpeed,
-              MINIONS.RUNNER.minionDamage
-            )
-          );
-        } else if (frame % 100 === 0) {
-          minions.push(
-            new Minion(
-              MINIONS.CRAWLER.minionColor,
-              MINIONS.CRAWLER.minionSize,
-              MINIONS.CRAWLER.minionHealth,
-              MINIONS.CRAWLER.minionSpeed,
-              MINIONS.CRAWLER.minionDamage
-            )
-          );
-        }
-
-        // minions.push(new Minion(MINIONS.CRAWLER.minionColor, MINIONS.CRAWLER.minionSize));
-        if (minionsInterval > 120) minionsInterval -= 50;
-      }
     }
 
     function handleProjectiles() {
